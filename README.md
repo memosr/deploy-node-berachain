@@ -1,62 +1,61 @@
-# Deploy Node Berachain
-This repository contains Ansible scripts for installing, updating, and removing a Berachain node on Linux systems. The playbook simplifies the process of setting up a Berachain node, managing its services, and ensuring that key transactions are recognized before proceeding with node operations.
+# Node Berachain'i Dağıtın
+Bu depo, Linux sistemlerinde bir Berachain düğümünü kurmak, güncellemek ve kaldırmak için Ansible betikleri içerir. Playbook, bir Berachain node'u kurma, hizmetlerini yönetme ve node işlemlerine devam etmeden önce önemli işlemlerin tanınmasını sağlama sürecini basitleştirir.
 
-## Prerequisites
-A Linux system (Ubuntu 22.04 LTS recommended) with root access.
-Git and Ansible installed on your machine.
+## Önkoşullar
+Kök erişimi olan bir Linux sistemi (Ubuntu 22.04 LTS önerilir).
+Makinenizde Git ve Ansible yüklü.
 
-## Getting Started
-### Step 1: Installing Dependencies
-Update your system's package list:
+## Başlarken
+### Adım 1: Bağımlılıkların Kurulması
+Sisteminizin paket listesini güncelleyin:
 
 ```
 sudo apt update && sudo apt upgrade -y
 ```
-Install Ansible and Git:
+Ansible ve Git'i yükleyin:
 ```
 sudo apt install ansible git -y
 ```
 
-### Step 2: Downloading the Project
-Clone this repository to get the Ansible playbook and all necessary files:
+### Adım 2: Projenin İndirilmesi
+Ansible playbook'u ve gerekli tüm dosyaları almak için bu depoyu klonlayın:
 ```
 git clone https://github.com/nodemasterpro/deploy-node-berachain.git
 cd deploy-node-berachain
 ```
 
-### Step 3: Executing the Playbook
-Run the playbook using the following command:
+### Adım 3: Oyun Kitabının Yürütülmesi
+Aşağıdaki komutu kullanarak playbook'u çalıştırın:
 ```
 ansible-playbook bera_node.yml -e node_action="install"
 ```
-Ensure you're running the playbook with root privileges or via a user with sudo access. The bearchain node is started after installation.
+Playbook'u root ayrıcalıklarıyla veya sudo erişimi olan bir kullanıcı aracılığıyla çalıştırdığınızdan emin olun. Kurulumdan sonra bearchain düğümü başlatılır.
 
 
-### Step 4: Viewing Logs
-To view the logs for the Berachain node:
+### Adım 4: Günlükleri Görüntüleme
+Berachain düğümünün günlüklerini görüntülemek için:
 ```
 journalctl -u berachain-node -f -o cat
 ```
 
-## Additional Note
+## Ek Not
 
-After installation , the Berachain node's adress and your mnemonic phrase are stored in the specified log file located at /root/berachain/output.log. Please ensure to check this location for your  mnemonic phrase and node adress.
+Kurulumdan sonra, Berachain düğümünün adresi ve anımsatıcı ifadeniz /root/berachain/output.log adresinde bulunan belirtilen günlük dosyasında saklanır. Lütfen anımsatıcı ifadeniz ve düğüm adresiniz için bu konumu kontrol ettiğinizden emin olun.
 
-Stopping Services:
-To stop the service:
+Hizmetleri Durdurma:
+Hizmeti durdurmak için:
 ```
 sudo systemctl stop berachain-node
 ```
 
-Starting Services:
-To start the Berachain node service:
+Hizmetleri Başlatma:
+Berachain düğüm hizmetini başlatmak için:
 ```
 sudo systemctl start berachain-node
 ```
 
-Remove berachain node: 
-To remove the berachain node, run the playbook using the following command:
+berachain düğümünü kaldırın: 
+berachain düğümünü kaldırmak için aşağıdaki komutu kullanarak playbook'u çalıştırın:
 ```
 ansible-playbook berachain_node.yml -e node_action="remove"
 ```
- For any questions, reach out on my Discord. Follow updates on Twitter, join the Telegram Group, the Discord Server, and subscribe to the YouTube Channel.
